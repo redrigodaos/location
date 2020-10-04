@@ -342,7 +342,9 @@ printf "\e[1;92m[\e[0m*\e[1;92m] Starting ngrok server...\n"
 sleep 5
 
 #link=$(curl -s -N http://127.0.0.1:4040/status | grep -o "https://[0-9a-z]*\.ngrok.io")
-#link=$(curl -s -N http://127.0.0.1:4040/api/tunnels | ./jq -r '.tunnels[0].public_url' > link.txt)
+link=$(curl -s -N http://localhost:4040/api/tunnels > link.txt)
+
+send_link=$(cat link.txt | cut -d',' -f3 | cut -d '"' -f4)
 link=$(curl -s -N http://127.0.0.1:4040/api/tunnels > link.txt)
 
 send_link=$(cat link.txt | cut -d',' -f3 | cut -d '"' -f4)
